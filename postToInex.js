@@ -1,5 +1,7 @@
 var nexPost = (data) => {
-    console.log(buildLeadPost(data));
+    var buildData = buildLeadPost(data);
+    //console.log(buildData);
+    return buildData;
 };
 
 var buildLeadPost = (data) => {
