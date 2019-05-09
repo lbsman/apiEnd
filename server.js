@@ -22,7 +22,7 @@ app.get('/',(req, res) => {
 app.post('/Send', (req, res) => {
 
     var getBody = func.nexPost(req.body);
-    console.log(Buffer.byteLength(getBody));
+    var buffSize = Buffer.byteLength(getBody);
 
     var options = { 
         method: 'POST',
@@ -31,7 +31,7 @@ app.post('/Send', (req, res) => {
         headers: 
         {
             'cache-control': 'no-cache',
-            Connection: 'keep-alive', 'content-length': '344', 'accept-encoding': 'gzip, deflate',
+            Connection: 'keep-alive', 'content-length': buffSize, 'accept-encoding': 'gzip, deflate',
             Host: 'api.inexusdialer.com', 'Cache-Control': 'no-cache',
             Accept: '*/*', 'Content-Length': Buffer.byteLength(getBody),
             Authorization: basicAuth, 'Content-Type': 'application/x-www-form-urlencoded' 
@@ -48,6 +48,32 @@ app.post('/Send', (req, res) => {
     });
     res.redirect('/thankYou.html');
 
+});
+
+app.get('/getInfo.html', (req, res) => {
+    var getBody = func.nexPost(req.body);
+    console.log(Buffer.byteLength(getBody));
+
+    var options = { 
+        method: 'GET',
+        url: 'https://api.inexusdialer.com/iNexusSoap/Service.asmx/GetAllCampaigns',
+        qs: { tenantID: '237' },
+        headers: 
+        {
+            'cache-control': 'no-cache',
+            Connection: 'keep-alive', 'accept-encoding': 'gzip, deflate',
+            Host: 'api.inexusdialer.com', 'Cache-Control': 'no-cache',
+            Accept: '*/*', 'Content-Length': Buffer.byteLength(getBody),
+            Authorization: basicAuth, 'Content-Type': 'application/x-www-form-urlencoded' 
+        }
+    };
+    
+
+    request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    console.log(body);
+    });
 });
 
 app.get('/thankYou.html', (req, res) => {

@@ -5,9 +5,15 @@ var nexPost = (data) => {
 };
 
 var buildLeadPost = (data) => {
-    var leadArray = ['First Name', data.fName, 'Last Name', data.lName, 
-    'Address1' , data.address, 'City', data.city, 'State', data.state, 'Zip', data.zip];
-    console.log('We are here');
+    var leadArray = [
+        'First Name', data.fName, 
+        'Last Name', data.lName, 
+        'Phone', data.phone, 
+        'Address1' , data.address, 
+        'City', data.city, 
+        'State', data.state, 
+        'Zip', data.zip
+    ];
     
     var leadString = xmlDta('1Outbound');
     leadString += apRecord();
@@ -18,7 +24,6 @@ var buildLeadPost = (data) => {
     leadString += enRecord();
     leadString += wrapUp();
 
-    console.log('Done');
     return leadString;
 };
 
