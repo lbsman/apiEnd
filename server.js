@@ -51,9 +51,7 @@ app.post('/Send', (req, res) => {
 });
 
 app.get('/getInfo', (req, res) => {
-
     var getBody = func.nexPost(req.body);
-    console.log(Buffer.byteLength(getBody));
 
     var options = { 
         method: 'GET',
@@ -75,9 +73,7 @@ app.get('/getInfo', (req, res) => {
         if (error) throw new Error(error);
         bodyResp = body;
         res.json({message: bodyResp});
-        //console.log(body);
     });
-    
 });
 
 app.get('/thankYou', (req, res) => {
