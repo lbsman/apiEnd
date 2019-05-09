@@ -50,7 +50,8 @@ app.post('/Send', (req, res) => {
 
 });
 
-app.get('/getInfo.html', (req, res) => {
+app.get('/getInfo', (req, res) => {
+
     var getBody = func.nexPost(req.body);
     console.log(Buffer.byteLength(getBody));
 
@@ -60,23 +61,26 @@ app.get('/getInfo.html', (req, res) => {
         qs: { tenantID: '237' },
         headers: 
         {
-            'cache-control': 'no-cache',
-            Connection: 'keep-alive', 'accept-encoding': 'gzip, deflate',
+            'cach-control': 'no-cache',
+            Connection: 'keep-alive',
             Host: 'api.inexusdialer.com', 'Cache-Control': 'no-cache',
-            Accept: '*/*', 'Content-Length': Buffer.byteLength(getBody),
-            Authorization: basicAuth, 'Content-Type': 'application/x-www-form-urlencoded' 
+            'Content-Type': 'application/xml',
+            Accept: '*/*', 
+            Authorization: basicAuth 
         }
     };
     
-
+    var bodyResp = "";
     request(options, function (error, response, body) {
-    if (error) throw new Error(error);
-
-    console.log(body);
+        if (error) throw new Error(error);
+        bodyResp = body;
+        res.json({message: bodyResp});
+        //console.log(body);
     });
+    
 });
 
-app.get('/thankYou.html', (req, res) => {
+app.get('/thankYou', (req, res) => {
     res.render('thankYou.html');
 });
 
@@ -84,6 +88,9 @@ app.listen(port, () => {
     console.log('Started on port ' + port);
 });
 
+function resp(body){
+    res.render(body);
+}
 
 
 
