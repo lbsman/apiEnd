@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Order stuff</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <link rel="text/css" href="/style.css">
+  </head>
+  <style>
+    ul {list-style: none; margin: 0; padding: 0; overflow: hidden; background-color: #333}
+    li {float: left;}
+    li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
+    li a:hover {background-color: #111;}
+    * {box-sizing: border-box;}
+    input[type=text], select, textarea{width: 100%;padding:12px;border: 1px solid, #ccc;border-radius:4px;resize:vertical;}
+    label{padding:12px 12px 12px 0; display:inline-block;}
+    input[type=submit]{background-color: #4CAF50; color: white; padding: 12px 20px; border:none;border-radius:4px;cursor: pointer;float:right;}
+    input[type=ssubmit]:hover{background-color: #45a049;}
+    .container{border-radius: 5px; background-color: #f2f2f2; padding:20px;}
+    .col-25{float: left; width:15%; margin-top:6px;}
+    .col-75{float: left; width:85%; margin-top:6px;}
+    .row:after{content:"";display:table;clear:both;}
+    @media screen and (max-width: 60px){.col-25,.col-75,input[type=submit]{width:100%;margin-top:0;}}
+  </style>
+  <body>
+    <ul>
+      <li><a href="/">Home Page</a></li>
+      <li><a href="/getInfo">Get Info</a></li>
+    </ul>
+    <form action="/Send" method="post">
+      <div class="container">
+        <div class="row">
+          <div class="col-25">
+            <label for="fName">First Name:</label>
+          </div>
+          <div class="col-75">
+              <input type="text" name="fName" placeholder="Enter first name...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="lName">Last Name:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" name="lName" placeholder="Enter last name...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="phoneNum">Phone number:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" name="phoneNum" placeholder="Enter phone number...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="city">City:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" name="city" placeholder="Enter city...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="zip">Zip:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" name="zip" placeholder="Enter zip code...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="address">Address:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" name="address" placeholder="Enter address...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="state">State:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" name="state" placeholder="Enter state...">
+          </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="Submit" id="btnSend" />
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

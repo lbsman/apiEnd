@@ -15,7 +15,7 @@ var buildLeadPost = (data) => {
         'Zip', data.zip
     ];
     
-    var leadString = xmlDta('1Outbound');
+    var leadString = xmlDta('Infocu5');
     leadString += apRecord();
     //now we build the column info
     for(i = 0; i < leadArray.length; i = i + 2){

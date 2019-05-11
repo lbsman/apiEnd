@@ -16,7 +16,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.engine('html', require('ejs').renderFile);
 
 app.get('/',(req, res) => {
-    res.render('test.html');
+    res.render('formFill.html');
+});
+app.get('/createCampaign',(req, res) => {
+    res.render('createCampaign.html');
 });
 
 app.post('/Send', (req, res) => {
@@ -31,7 +34,7 @@ app.post('/Send', (req, res) => {
         headers: 
         {
             'cache-control': 'no-cache',
-            Connection: 'keep-alive', 'content-length': buffSize, 'accept-encoding': 'gzip, deflate',
+            Connection: 'keep-alive', 'content-length': buffSize,
             Host: 'api.inexusdialer.com', 'Cache-Control': 'no-cache',
             Accept: '*/*', 'Content-Length': Buffer.byteLength(getBody),
             Authorization: basicAuth, 'Content-Type': 'application/x-www-form-urlencoded' 
@@ -46,7 +49,7 @@ app.post('/Send', (req, res) => {
 
     console.log(body);
     });
-    res.redirect('/thankYou.html');
+    res.redirect('/thankYou');
 
 });
 
