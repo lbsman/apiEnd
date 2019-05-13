@@ -1,9 +1,11 @@
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
+const mustache = require('mustache');
 const func = require('./postToInex.js');
-const axios = require('axios');
 const btoa = require('btoa');
+const parseString = require('xml2js').parseString;
+const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -72,10 +74,31 @@ app.get('/getInfo', (req, res) => {
     };
     
     var bodyResp = "";
+    var displayJson = [];
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
-        bodyResp = body;
-        res.json({message: bodyResp});
+        parseString(body, function(err,result){
+            bodyResp = result.string._.split("Row");
+            bodyResp.splice(0,1);
+            for(var i = 0; i < bodyResp.length; i++){
+                bodyResp[i] = bodyResp[i].trim();
+                bodyResp[i] = bodyResp[i].replace(" /><","").replace("/Campaigns>","");
+                var campaignId = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("CampaignID"), bodyResp[i].indexOf('CampaignName')-1).replace('"',''));
+                var campaignName = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("CampaignName"), bodyResp[i].indexOf('Type')-1).replace('"',''));
+                var campType = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("Type"), bodyResp[i].indexOf('DialingRule')-1).replace('"',''));
+                var dialingRule = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("DialingRule"), bodyResp[i].indexOf('Status')-1).replace('"',''));
+                var status = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("Status"), bodyResp[i].indexOf('Ratio')-1).replace('"',''));
+                var ratio = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("Ratio"), bodyResp[i].indexOf('CampaignGroup')-1).replace('"',''));
+                var campaignGroup = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("CampaignGroup"), bodyResp[i].indexOf('/><')-1).replace('"',''));
+                
+                var newThing = {name: campaignName, cId: campaignId, cType: campType, dialRul: dialingRule, stat: status, rat: ratio, cGroup: campaignGroup};
+                displayJson.push(newThing);
+            }
+            var page = fs.readFileSync('views/testThing.html', 'utf8');
+            var rData = {records:displayJson};
+            var html = mustache.to_html(page, rData);
+            res.send(html);
+        });
     });
 });
 
@@ -87,11 +110,17 @@ app.listen(port, () => {
     console.log('Started on port ' + port);
 });
 
-function resp(body){
-    res.render(body);
-}
+app.get('/testThing', (req, res) => {
+    var demoData = {"name": "Josh Wrenn"};
+    var page = fs.readFileSync('views/testThing.html', "utf8");
+    var html = mustache.to_html(page, demoData);
+    
+    res.send(html);
+});
 
-
+var nexPost = (data) => {
+    return data.substring(data.indexOf("=")+1,data.indexOf('"'));
+};
 
 
 
