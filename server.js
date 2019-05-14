@@ -75,9 +75,12 @@ app.get('/getInfo', (req, res) => {
     
     var bodyResp = "";
     var displayJson = [];
+
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
         parseString(body, function(err,result){
+            var onCamps = [];
+            var offCamps = [];
             bodyResp = result.string._.split("Row");
             bodyResp.splice(0,1);
             for(var i = 0; i < bodyResp.length; i++){
@@ -91,15 +94,32 @@ app.get('/getInfo', (req, res) => {
                 var ratio = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("Ratio"), bodyResp[i].indexOf('CampaignGroup')-1).replace('"',''));
                 var campaignGroup = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("CampaignGroup"), bodyResp[i].indexOf('/><')-1).replace('"',''));
                 
-                var newThing = {name: campaignName, cId: campaignId, cType: campType, dialRul: dialingRule, stat: status, rat: ratio, cGroup: campaignGroup};
-                displayJson.push(newThing);
+                var newThing = {name: campaignName, cId: campaignId, cType: campType, dialRul: dialingRule, stat: status, rat: ratio, cGroup: campaignGroup, editInfo: campaignId};
+                //Will determine were to put the info 
+                if(status === 'OFF'){
+                    offCamps.push(newThing);
+                }else{
+                    onCamps.push(newThing);
+                }
             }
-            var page = fs.readFileSync('views/testThing.html', 'utf8');
-            var rData = {records:displayJson};
+            var page = fs.readFileSync('views/campaignInfo.html', 'utf8');
+            var rData = {offStuff: offCamps, onStuff: onCamps};
             var html = mustache.to_html(page, rData);
             res.send(html);
         });
     });
+});
+
+app.get('/campaignInfo', (req, res)=> {
+    // console.log(req);
+    var newThing = {name: req.query.cName, cid: req.query.cid, cType: req.query.ctype, dialRul: req.query.drule, stat: req.query.stat, rat: req.query.rat, cGroup: req.query.cgro};
+    var dData = [];
+    dData.push(newThing);
+    var page = fs.readFileSync('views/singleCampaign.html', 'utf8');
+    var rData = {cData: dData};
+    var html = mustache.to_html(page, rData);
+    res.send(html);
+    // res.render('singleCampaign.html');
 });
 
 app.get('/thankYou', (req, res) => {
