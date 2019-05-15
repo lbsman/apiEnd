@@ -40,8 +40,8 @@
                             data.push(cells[i].innerHTML);
                         }
                     }
-                    // alert(data);
                     window.location = '/campaignInfo?cName=' + data[0] + '&cid=' + data[1] + '&ctype=' + data[2] + '&drule=' + data[3] + '&stat=' + data[4] + '&rat=' + data[5] + '&cgro=' + data[6];
+                    // alert(data);
                 };
                 table = document.getElementsByTagName("table")[1];
                 var tbody2 = table.getElementsByTagName("tbody")[0];
@@ -58,7 +58,7 @@
                             data.push(cells[i].innerHTML);
                         }
                     }
-                    // console.log(data);
+                    console.log(data);
                     window.location = '/campaignInfo?cName=' + data[0] + '&cid=' + data[1] + '&ctype=' + data[2] + '&drule=' + data[3] + '&stat=' + data[4] + '&rat=' + data[5] + '&cgro=' + data[6];
                     // alert(data);
                 };

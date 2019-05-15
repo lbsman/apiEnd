@@ -10,10 +10,11 @@
       li {float: left;}
       li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
       li a:hover {background-color: #111;}
-      .container{border-radius: 5px; background-color: #f2f2f2; padding:60px;margin:60px;}
-      .col-25{float: left; width: 30%;margin-top:6px;}
-      .col-75{float: right; width:60%; margin-top:6px;}
+      .container{border-radius: 5px; background-color: #f2f2f2; padding: 10px; margin: 10px;}
+      .col-25{float: left; width: 50%;margin-top:6px;}
+      .col-75{float: right; width:50%; margin-top:6px; color:#010059}
       .row:after{content:""; display:table;clear:both;}
+      .row{margin-left: 10em;}
       .switch {position: relative;display: inline-block;width: 60px;height: 34px;}
       .switch input { opacity: 0;width: 0;height: 0;}
       .slider {position: absolute;cursor: pointer;top: 0;left: 0;right: 0;bottom: 0;background-color: #ccc;-webkit-transition: .4s;transition: .4s;}
@@ -23,8 +24,21 @@
       input:checked + .slider:before {-webkit-transform: translateX(26px);-ms-transform: translateX(26px);transform: translateX(26px);}
       .slider.round {border-radius: 34px;}
       .slider.round:before {border-radius: 50%;}
-      h1 {font-size:1em;}
-      @media screen and (max-width: 600px){.col-25,.col-75,input[type=submit]{width:100%; margin-top:0;}}
+      h1 {font-size:1em; text-align: center;}
+      @media (max-width: 600px){
+        .col-25,.col-75{
+          width: 100%;
+          float: none;
+          margin: 0 0 5px 0;
+        }
+        .col-75{
+          margin-left: 1em;
+        }
+        .row{
+          margin-left: 0em;
+        }
+      }
+      /* @media screen and (max-width: 600px){.col-25,.col-75,input[type=submit]{width:100%; margin-top:0;}} */
   </style>
   <body>
     <ul>
@@ -37,7 +51,7 @@
       <input type="button" value="Back" onclick="history.back()">
     </form>
     {{#cData}}
-    <h1 style="text-align: center">{{name}}</h1>
+    <h1>{{name}}</h1>
     <div class="container">
       <div class="row">
         <div class="col-25">
@@ -88,22 +102,22 @@
         </div>
       </div>
           <br><br>
+          
     <label style="display: block; margin:0 auto;" class="switch">
-      <input type="checkbox">
+      <input name="switchThing" type="checkbox">
       <span class="slider round"></span>
     </label>
     </div>
     {{/cData}}
-
-<!--     
-    {{#cData}}
-    <h1 style="text-align: center">{{name}}</h1>
-    <p>Campaign ID: {{cid}}</p>
-    <p>Campaign Type: {{cType}}</p>
-    <p>Dialing Rule: {{dialRul}}</p>
-    <p>Status: {{stat}}</p>
-    <p>Ratio: {{rat}}</p>
-    <p>Campaign Group: {{cgro}}</p>
-    {{/cData}} -->
+    <h1 style="padding: .5px;">Edit settings </h1>
+    <div class='container'>
+      <div>
+        <label for="dispoCopier">Copy dispos to {{name}} from </label>
+        <select name="dispoCopier" id="">
+          <option value="Campaign A">Campaign A</option>
+          <option value="Campaign B">Campaign B</option>
+        </select>
+    </div>
+    </div>
   </body>
 </html>
