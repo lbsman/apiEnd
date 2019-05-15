@@ -16,6 +16,7 @@
             table tr:nth-child(odd){background-color: #5588a3; color: #e8e8e8;}
             table a {text-decoration: none; display: block;}
             th, td {padding: 5px;}
+            th {background-color: black; color: white;}
             td:hover{background-color: #145374; color: #e8e8e8;}
             #cTable td {text-align: center;vertical-align: middle;}
             h1 {text-align: center;}
@@ -39,7 +40,8 @@
                             data.push(cells[i].innerHTML);
                         }
                     }
-                    alert(data);
+                    window.location = '/campaignInfo?cName=' + data[0] + '&cid=' + data[1] + '&ctype=' + data[2] + '&drule=' + data[3] + '&stat=' + data[4] + '&rat=' + data[5] + '&cgro=' + data[6];
+                    // alert(data);
                 };
                 table = document.getElementsByTagName("table")[1];
                 var tbody2 = table.getElementsByTagName("tbody")[0];
@@ -69,7 +71,7 @@
             <li><a href="/getInfo">Campaign Info</a></li>
             <li><a href="/createCampaign">Create Campaign</a></li>
         </ul>
-        <h1>Campaigns Turned On</h1>
+        <h1>Campaigns Currently On</h1>
         <table id='cTable' class='list'>
             <thead>
                 <tr>
@@ -99,7 +101,7 @@
                 {{/onStuff}}
             </tbody>
         </table>
-        <h1>Campaigns Turned Off</h1>
+        <h1>Campaigns Currently Off</h1>
         <table id='cTable' class='list'>
             <thead>
                 <tr>

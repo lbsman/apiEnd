@@ -85,7 +85,7 @@ app.get('/getInfo', (req, res) => {
             bodyResp.splice(0,1);
             for(var i = 0; i < bodyResp.length; i++){
                 bodyResp[i] = bodyResp[i].trim();
-                bodyResp[i] = bodyResp[i].replace(" /><","").replace("/Campaigns>","");
+                // bodyResp[i] = bodyResp[i].replace(" /><","").replace("/Campaigns>","");
                 var campaignId = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("CampaignID"), bodyResp[i].indexOf('CampaignName')-1).replace('"',''));
                 var campaignName = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("CampaignName"), bodyResp[i].indexOf('Type')-1).replace('"',''));
                 var campType = nexPost(bodyResp[i].substring(bodyResp[i].indexOf("Type"), bodyResp[i].indexOf('DialingRule')-1).replace('"',''));
@@ -126,10 +126,6 @@ app.get('/thankYou', (req, res) => {
     res.render('thankYou.html');
 });
 
-app.listen(port, () => {
-    console.log('Started on port ' + port);
-});
-
 app.get('/testThing', (req, res) => {
     var demoData = {"name": "Josh Wrenn"};
     var page = fs.readFileSync('views/testThing.html', "utf8");
@@ -142,9 +138,9 @@ var nexPost = (data) => {
     return data.substring(data.indexOf("=")+1,data.indexOf('"'));
 };
 
-
-
-
+app.listen(port, () => {
+    console.log('Started on port ' + port);
+});
 
 
 
