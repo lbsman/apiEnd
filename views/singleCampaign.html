@@ -11,8 +11,8 @@
       li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
       li a:hover {background-color: #111;}
       .container{border-radius: 5px; background-color: #f2f2f2; padding:60px;margin:60px;}
-      .col-25{float: left; width: 20%;margin-top:6px;}
-      .col-75{float: right; width:80%; margin-top:6px;}
+      .col-25{float: left; width: 30%;margin-top:6px;}
+      .col-75{float: right; width:60%; margin-top:6px;}
       .row:after{content:""; display:table;clear:both;}
       .switch {position: relative;display: inline-block;width: 60px;height: 34px;}
       .switch input { opacity: 0;width: 0;height: 0;}
@@ -23,6 +23,8 @@
       input:checked + .slider:before {-webkit-transform: translateX(26px);-ms-transform: translateX(26px);transform: translateX(26px);}
       .slider.round {border-radius: 34px;}
       .slider.round:before {border-radius: 50%;}
+      h1 {font-size:1em;}
+      @media screen and (max-width: 600px){.col-25,.col-75,input[type=submit]{width:100%; margin-top:0;}}
   </style>
   <body>
     <ul>
@@ -31,6 +33,7 @@
       <li><a href="/createCampaign">Create Campaign</a></li>
     </ul>
     <form>
+      <br>
       <input type="button" value="Back" onclick="history.back()">
     </form>
     {{#cData}}
@@ -38,7 +41,7 @@
     <div class="container">
       <div class="row">
         <div class="col-25">
-          <label for="">Campaign ID:</label>
+          <label for="">Campaign ID</label>
         </div>
         <div class="col-75">
           <label for="">{{cid}}</label>
@@ -46,7 +49,7 @@
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="">Campaign Type:</label>
+          <label for="">Campaign Type</label>
         </div>
         <div class="col-75">
           <label for="">{{cType}}</label>
@@ -54,7 +57,7 @@
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="">Dialing Rule:</label>
+          <label for="">Dialing Rule</label>
         </div>
         <div class="col-75">
           <label for="">{{dialRul}}</label>
@@ -62,7 +65,7 @@
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="">Status:</label>
+          <label for="">Status</label>
         </div>
         <div class="col-75">
           <label for="">{{stat}}</label>
@@ -78,7 +81,7 @@
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="">Campaign Group:</label>
+          <label for="">Campaign Group</label>
         </div>
         <div class="col-75">
           <label for="">{{cGroup}}</label>
