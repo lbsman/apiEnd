@@ -44,15 +44,11 @@ app.post('/Send', (req, res) => {
         form: false,
         body: getBody
     };
-    
-
     request(options, function (error, response, body) {
-    if (error) throw new Error(error);
-
-    console.log(body);
+        if (error) throw new Error(error);
+        console.log(body);
     });
     res.redirect('/thankYou');
-
 });
 
 app.get('/getInfo', (req, res) => {
@@ -120,6 +116,9 @@ app.get('/campaignInfo', (req, res)=> {
     var html = mustache.to_html(page, rData);
     res.send(html);
     // res.render('singleCampaign.html');
+});
+app.post('/campStatChange', (req, res) => {
+    console.log(req);
 });
 
 app.get('/thankYou', (req, res) => {
